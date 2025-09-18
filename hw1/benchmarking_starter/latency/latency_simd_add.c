@@ -4,11 +4,62 @@
 #include <immintrin.h>
 
 //TODO: Adjust the frequency based on your machine.
-#define MAX_FREQ 3.4
-#define BASE_FREQ 2.4
+#define MAX_FREQ 3.2
+#define BASE_FREQ 2.1
 
 //TODO: Change this to reflect the number of instructions in your chain
-#define NUM_INST 625.0 
+#define NUM_INST 3000.0 
+
+// #define ADD(src1, src2, dest) \
+//   __asm__ __volatile__( \
+//     "vaddpd %[xsrc1], %[xsrc2], %[xdest]\n" \
+//     "vaddpd %[xdest], %[xsrc1], %[xsrc2]\n" \
+//     "vaddpd %[xsrc2], %[xdest], %[xsrc1]\n" \
+//     : [xdest] "+x" (dest), \
+//       [xsrc1] "+x" (src1), \
+//       [xsrc2] "+x" (src2)  \
+//   );
+
+#define SIMD_ADD(dest, src0, src1)                                             \
+  __asm__ __volatile__("vaddpd %[xsrc0], %[xsrc1], %[xdest]\n"                 \
+                       : [xdest] "+x"(dest)                                    \
+                       : [xsrc1] "x"(src1), [xsrc0] "x"(src0));
+
+#define ADD10(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) \
+  SIMD_ADD(x, y, z) 
+
+#define ADD100(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z) \
+  ADD10(x, y, z)
+
+#define ADD1000(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z) \
+  ADD100(x, y, z)
 
 
 static __inline__ unsigned long long rdtsc(void) {
@@ -32,10 +83,17 @@ int main(int argc, char **argv) {
   unsigned long long st;
   unsigned long long et;
   unsigned long long sum = 0;
+  double a[4] = {1.0, 1.0, 1.0, 1.0};
+  __m256d ax = _mm256_load_pd(&a[0]);
 
   for (int j = 0; j < runs; j++) {
     st = rdtsc();
-    //TODO: Put your latency testing code here
+
+    ADD1000(ax, ax, ax);
+    ADD1000(ax, ax, ax);
+    ADD1000(ax, ax, ax);
+
+    
     et = rdtsc();
     // Chain of NUM_INST simd add instructions
     sum += (et-st);

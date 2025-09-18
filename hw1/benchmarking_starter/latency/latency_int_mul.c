@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 
   }
 
-  printf("RDTSC Base Cycles Taken for SIMD_ADD: %llu\n\r",sum);
+  printf("RDTSC Base Cycles Taken for INT_MUL: %llu\n\r",sum);
   printf("Latency: %lf\n\r", MAX_FREQ/BASE_FREQ * sum / (NUM_INST * runs));
 
   return 0;
