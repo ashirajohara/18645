@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
   // int runs = atoi(argv[1]);
   // You might want to use the above code to control number of runs.
   int runs = 100;
-  
+
 
   unsigned long long st;
   unsigned long long et;
@@ -81,7 +81,6 @@ int main(int argc, char **argv) {
   __m256d xx = _mm256_load_pd(&x[0]);
   __m256d yx = _mm256_load_pd(&y[0]);
   __m256d zx = _mm256_load_pd(&z[0]);
-
 
   for (int j = 0; j < runs; j++) {
     st = rdtsc();

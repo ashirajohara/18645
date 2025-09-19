@@ -10,32 +10,26 @@
 //TODO: Change this to reflect the number of instructions in your chain
 #define NUM_INST 3000.0 
 
-// #define ADD(src1, src2, dest) \
-//   __asm__ __volatile__( \
-//     "vaddpd %[xsrc1], %[xsrc2], %[xdest]\n" \
-//     "vaddpd %[xdest], %[xsrc1], %[xsrc2]\n" \
-//     "vaddpd %[xsrc2], %[xdest], %[xsrc1]\n" \
-//     : [xdest] "+x" (dest), \
-//       [xsrc1] "+x" (src1), \
-//       [xsrc2] "+x" (src2)  \
-//   );
+#define ADD(src1, src2, dest) \
+  __asm__ __volatile__( \
+    "vaddpd %[xsrc1], %[xsrc2], %[xdest]\n" \
+    : [xdest] "+x" (dest) \
+    : [xsrc1] "x" (src1), \
+      [xsrc2] "x" (src2)  \
+  );
 
-#define SIMD_ADD(dest, src0, src1)                                             \
-  __asm__ __volatile__("vaddpd %[xsrc0], %[xsrc1], %[xdest]\n"                 \
-                       : [xdest] "+x"(dest)                                    \
-                       : [xsrc1] "x"(src1), [xsrc0] "x"(src0));
 
 #define ADD10(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) \
-  SIMD_ADD(x, y, z) 
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) \
+  ADD(x, y, z) 
 
 #define ADD100(x, y, z) \
   ADD10(x, y, z) \
@@ -93,7 +87,6 @@ int main(int argc, char **argv) {
     ADD1000(ax, ax, ax);
     ADD1000(ax, ax, ax);
 
-    
     et = rdtsc();
     // Chain of NUM_INST simd add instructions
     sum += (et-st);

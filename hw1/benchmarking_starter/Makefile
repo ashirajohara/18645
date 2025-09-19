@@ -1,5 +1,5 @@
 CC		= gcc
-CC_FLAGS 	= -mavx -mfma -O3 -std=c99
+CC_FLAGS 	= -mavx -mfma -O2 -std=c99
 
 default: all assemble
 
@@ -29,10 +29,10 @@ throughput_simd_fma.x:
 	
 
 assemble:
-	objdump -s -d -f --source ./latency_simd_add.x > latency_simd_add.S
-	objdump -s -d -f --source ./latency_simd_fma.x > latency_simd_fma.S
-	objdump -s -d -f --source ./throughput_simd_add.x > throughput_simd_add.S
-	objdump -s -d -f --source ./throughput_simd_fma.x > throughput_simd_fma.S
+	objdump -d --source ./latency_simd_add.x > latency_simd_add.S
+	objdump -d --source ./latency_simd_fma.x > latency_simd_fma.S
+	objdump -d --source ./throughput_simd_add.x > throughput_simd_add.S
+	objdump -d --source ./throughput_simd_fma.x > throughput_simd_fma.S
 
 clean:
 	rm -rf *.x *.S
