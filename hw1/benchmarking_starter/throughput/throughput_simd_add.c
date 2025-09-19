@@ -3,14 +3,17 @@
 #include <x86intrin.h>
 #include <immintrin.h>
 
-//TODO: Adjust the frequency based on your machine.
+// These specs work and are for Intel(R) Xeon(R) Silver 4208 CPU @ 2.10GHz (ECE machine 022)
 #define MAX_FREQ 3.2
 #define BASE_FREQ 2.1
-
-//TODO: Change number of instructions to reflect your chains
 #define NUM_INST 3000.0
-//TODO: Change to reflect number of independent chains
 #define NUM_CHAINS 8
+
+static __inline__ unsigned long long rdtsc(void) {
+  unsigned hi, lo;
+  __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
+  return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
+}
 
 #define ADD(src1, src2, src3, src4, src5, src6, src7, src8) \
   __asm__ __volatile__( \
@@ -68,20 +71,9 @@
   ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
   ADD100(ax, bx, cx, dx, ex, fx, gx, hx)
 
-static __inline__ unsigned long long rdtsc(void) {
-  unsigned hi, lo;
-  __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
-  return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
-}
-
-//TODO: Define your Macros here
-
 int main(int argc, char **argv) {
 
-  // int runs = atoi(argv[1]);
-  // You might want to use the above code to control number of runs.
   int runs = 100;
-
   unsigned long long st;
   unsigned long long et;
   unsigned long long sum = 0;
@@ -118,14 +110,11 @@ int main(int argc, char **argv) {
 
   for (int j = 0; j < runs; j++) {
 
-    // Time the add
     st = rdtsc();
     ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
     ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
     ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
-
     et = rdtsc();
-
     sum += (et-st);
 
   }

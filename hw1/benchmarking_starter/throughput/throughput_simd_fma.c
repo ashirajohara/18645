@@ -3,10 +3,11 @@
 #include <x86intrin.h>
 #include <immintrin.h>
 
+// These specs work and are for Intel(R) Xeon(R) Silver 4208 CPU @ 2.10GHz (ECE machine 022)
 #define MAX_FREQ 3.2
 #define BASE_FREQ 2.1
 #define NUM_INST 3000.0
-#define NUM_CHAINS 16
+#define NUM_CHAINS 8
 
 static __inline__ unsigned long long rdtsc(void) {
   unsigned hi, lo;
@@ -34,62 +35,45 @@ static __inline__ unsigned long long rdtsc(void) {
       [xsrc8] "+x" (src8) \
   );
 
-#define FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
+#define FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
   FMA(ax, bx, cx, dx, ex, fx, gx, hx) \
-  FMA(ix, jx, kx, lx, mx, nx, ox, px) \
 
-#define FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA10(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px)
+#define FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA10(ax, bx, cx, dx, ex, fx, gx, hx)
 
-#define FMA1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px) \
-  FMA100(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px)
-
-
-//TODO: Define your Macros here
+#define FMA1000(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  FMA100(ax, bx, cx, dx, ex, fx, gx, hx)
 
 int main(int argc, char **argv) {
 
-
-  // int runs = atoi(argv[1]);
-  // You might want to use the above code to control number of runs.
   int runs = 100;
-
   unsigned long long st;
   unsigned long long et;
   unsigned long long sum = 0;
@@ -128,23 +112,18 @@ int main(int argc, char **argv) {
 
   for (int j = 0; j < runs; j++) {
 
-    // Time the add
     st = rdtsc();
-    
-    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px);
-    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px);
-    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx, kx, lx, mx, nx, ox, px);
-    //TODO:Put your chains here
-    
+    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx);
+    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx);
+    FMA1000(ax, bx, cx, dx, ex, fx, gx, hx);
     et = rdtsc();
-
     sum += (et-st);
 
   }
 
-  printf("RDTSC Base Cycles Taken for SIMD_ADD: %llu\n\r",sum);
-  printf("TURBO Cycles Taken for SIMD_ADD: %lf\n\r",sum * ((double)MAX_FREQ)/BASE_FREQ);
-  printf("Throughput : %lf\n\r",(double)(NUM_INST * runs * NUM_CHAINS) / (sum * MAX_FREQ/BASE_FREQ));
+  printf("RDTSC Base Cycles Taken for SIMD_FMA: %llu\n\r",sum);
+  printf("TURBO Cycles Taken for SIMD_FMA: %lf\n\r",sum * ((double)MAX_FREQ)/BASE_FREQ);
+  printf("Throughput : %lf (Chains: %d)\n\r", (double)(NUM_INST * runs * NUM_CHAINS) / (sum * MAX_FREQ/BASE_FREQ), NUM_CHAINS);
 
 return 0;
 }

@@ -3,12 +3,16 @@
 #include <x86intrin.h>
 #include <immintrin.h>
 
-//TODO: Adjust the frequency based on your machine.
+// These specs work and are for Intel(R) Xeon(R) Silver 4208 CPU @ 2.10GHz (ECE machine 022)
 #define MAX_FREQ 3.2
 #define BASE_FREQ 2.1
-
-//TODO: Change this to reflect the number of instructions in your chain
 #define NUM_INST 3000.0 
+
+static __inline__ unsigned long long rdtsc(void) {
+  unsigned hi, lo;
+  __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
+  return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
+}
 
 #define ADD(src1, src2, dest) \
   __asm__ __volatile__( \
@@ -55,23 +59,8 @@
   ADD100(x, y, z) \
   ADD100(x, y, z)
 
-
-static __inline__ unsigned long long rdtsc(void) {
-  unsigned hi, lo;
-  __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
-  return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
-}
-
-
-//TODO: define your macros here
-
-//Hint: You may want to write Macros that call Macro intrinsics
-
 int main(int argc, char **argv) {
 
-  
-  // int runs = atoi(argv[1]);
-  // You might want to use the above code to control number of runs.
   int runs = 100;
 
   unsigned long long st;
@@ -81,14 +70,12 @@ int main(int argc, char **argv) {
   __m256d ax = _mm256_load_pd(&a[0]);
 
   for (int j = 0; j < runs; j++) {
+
     st = rdtsc();
-
     ADD1000(ax, ax, ax);
     ADD1000(ax, ax, ax);
     ADD1000(ax, ax, ax);
-
     et = rdtsc();
-    // Chain of NUM_INST simd add instructions
     sum += (et-st);
 
   }

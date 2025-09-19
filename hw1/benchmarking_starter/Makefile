@@ -1,5 +1,5 @@
 CC		= gcc
-CC_FLAGS 	= -mavx -mfma -O2 -std=c99
+CC_FLAGS 	= -mavx -mfma -O3 -std=c99
 
 default: all assemble
 
