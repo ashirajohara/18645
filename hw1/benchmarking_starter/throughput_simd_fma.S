@@ -7,7 +7,7 @@ Disassembly of section .init:
 0000000000400468 <_init>:
   400468:	f3 0f 1e fa          	endbr64 
   40046c:	48 83 ec 08          	sub    $0x8,%rsp
-  400470:	48 8b 05 79 0b 20 00 	mov    0x200b79(%rip),%rax        # 600ff0 <__gmon_start__@Base>
+  400470:	48 8b 05 79 4b 20 00 	mov    0x204b79(%rip),%rax        # 604ff0 <__gmon_start__@Base>
   400477:	48 85 c0             	test   %rax,%rax
   40047a:	74 02                	je     40047e <_init+0x16>
   40047c:	ff d0                	callq  *%rax
@@ -17,204 +17,3222 @@ Disassembly of section .init:
 Disassembly of section .plt:
 
 0000000000400490 <.plt>:
-  400490:	ff 35 72 0b 20 00    	pushq  0x200b72(%rip)        # 601008 <_GLOBAL_OFFSET_TABLE_+0x8>
-  400496:	ff 25 74 0b 20 00    	jmpq   *0x200b74(%rip)        # 601010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  400490:	ff 35 72 4b 20 00    	pushq  0x204b72(%rip)        # 605008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  400496:	ff 25 74 4b 20 00    	jmpq   *0x204b74(%rip)        # 605010 <_GLOBAL_OFFSET_TABLE_+0x10>
   40049c:	0f 1f 40 00          	nopl   0x0(%rax)
 
 00000000004004a0 <printf@plt>:
-  4004a0:	ff 25 72 0b 20 00    	jmpq   *0x200b72(%rip)        # 601018 <printf@GLIBC_2.2.5>
+  4004a0:	ff 25 72 4b 20 00    	jmpq   *0x204b72(%rip)        # 605018 <printf@GLIBC_2.2.5>
   4004a6:	68 00 00 00 00       	pushq  $0x0
   4004ab:	e9 e0 ff ff ff       	jmpq   400490 <.plt>
 
 Disassembly of section .text:
 
 00000000004004b0 <main>:
-  4004b0:	53                   	push   %rbx
-  4004b1:	bf 64 00 00 00       	mov    $0x64,%edi
-  4004b6:	31 db                	xor    %ebx,%ebx
-  4004b8:	48 83 ec 10          	sub    $0x10,%rsp
-  4004bc:	0f 1f 40 00          	nopl   0x0(%rax)
-  4004c0:	0f 31                	rdtsc  
-  4004c2:	89 d1                	mov    %edx,%ecx
-  4004c4:	89 c6                	mov    %eax,%esi
-  4004c6:	0f 31                	rdtsc  
-  4004c8:	48 c1 e2 20          	shl    $0x20,%rdx
-  4004cc:	89 c0                	mov    %eax,%eax
-  4004ce:	48 c1 e1 20          	shl    $0x20,%rcx
-  4004d2:	48 09 c2             	or     %rax,%rdx
-  4004d5:	48 09 f1             	or     %rsi,%rcx
-  4004d8:	48 29 ca             	sub    %rcx,%rdx
-  4004db:	48 01 d3             	add    %rdx,%rbx
-  4004de:	83 ef 01             	sub    $0x1,%edi
-  4004e1:	75 dd                	jne    4004c0 <main+0x10>
-  4004e3:	31 c0                	xor    %eax,%eax
-  4004e5:	48 89 de             	mov    %rbx,%rsi
-  4004e8:	bf f8 06 40 00       	mov    $0x4006f8,%edi
-  4004ed:	e8 ae ff ff ff       	callq  4004a0 <printf@plt>
-  4004f2:	48 85 db             	test   %rbx,%rbx
-  4004f5:	78 5b                	js     400552 <main+0xa2>
-  4004f7:	c5 f1 57 c9          	vxorpd %xmm1,%xmm1,%xmm1
-  4004fb:	c4 e1 f3 2a cb       	vcvtsi2sd %rbx,%xmm1,%xmm1
-  400500:	c5 f3 59 0d 60 02 00 	vmulsd 0x260(%rip),%xmm1,%xmm1        # 400768 <__dso_handle+0x78>
-  400507:	00 
-  400508:	bf 28 07 40 00       	mov    $0x400728,%edi
-  40050d:	b8 01 00 00 00       	mov    $0x1,%eax
-  400512:	c5 f3 5e 0d 56 02 00 	vdivsd 0x256(%rip),%xmm1,%xmm1        # 400770 <__dso_handle+0x80>
-  400519:	00 
-  40051a:	c5 f9 28 c1          	vmovapd %xmm1,%xmm0
-  40051e:	c5 fb 11 4c 24 08    	vmovsd %xmm1,0x8(%rsp)
-  400524:	e8 77 ff ff ff       	callq  4004a0 <printf@plt>
-  400529:	c5 fb 10 4c 24 08    	vmovsd 0x8(%rsp),%xmm1
-  40052f:	bf 50 07 40 00       	mov    $0x400750,%edi
-  400534:	c5 fb 10 05 3c 02 00 	vmovsd 0x23c(%rip),%xmm0        # 400778 <__dso_handle+0x88>
-  40053b:	00 
-  40053c:	b8 01 00 00 00       	mov    $0x1,%eax
-  400541:	c5 fb 5e c1          	vdivsd %xmm1,%xmm0,%xmm0
-  400545:	e8 56 ff ff ff       	callq  4004a0 <printf@plt>
-  40054a:	48 83 c4 10          	add    $0x10,%rsp
-  40054e:	31 c0                	xor    %eax,%eax
-  400550:	5b                   	pop    %rbx
-  400551:	c3                   	retq   
-  400552:	48 89 d8             	mov    %rbx,%rax
-  400555:	83 e3 01             	and    $0x1,%ebx
-  400558:	c5 f1 57 c9          	vxorpd %xmm1,%xmm1,%xmm1
-  40055c:	48 d1 e8             	shr    %rax
-  40055f:	48 09 d8             	or     %rbx,%rax
-  400562:	c4 e1 f3 2a c8       	vcvtsi2sd %rax,%xmm1,%xmm1
-  400567:	c5 f3 58 c9          	vaddsd %xmm1,%xmm1,%xmm1
-  40056b:	eb 93                	jmp    400500 <main+0x50>
+  4004b0:	4c 8d 54 24 08       	lea    0x8(%rsp),%r10
+  4004b5:	48 83 e4 e0          	and    $0xffffffffffffffe0,%rsp
+  4004b9:	bf 64 00 00 00       	mov    $0x64,%edi
+  4004be:	41 ff 72 f8          	pushq  -0x8(%r10)
+  4004c2:	55                   	push   %rbp
+  4004c3:	48 89 e5             	mov    %rsp,%rbp
+  4004c6:	41 52                	push   %r10
+  4004c8:	53                   	push   %rbx
+  4004c9:	31 db                	xor    %ebx,%ebx
+  4004cb:	48 83 ec 40          	sub    $0x40,%rsp
+  4004cf:	c5 fb 10 05 71 3d 00 	vmovsd 0x3d71(%rip),%xmm0        # 404248 <__dso_handle+0x78>
+  4004d6:	00 
+  4004d7:	c5 fb 11 45 d0       	vmovsd %xmm0,-0x30(%rbp)
+  4004dc:	c5 fb 11 45 d8       	vmovsd %xmm0,-0x28(%rbp)
+  4004e1:	c5 fb 11 45 e0       	vmovsd %xmm0,-0x20(%rbp)
+  4004e6:	c5 fb 11 45 e8       	vmovsd %xmm0,-0x18(%rbp)
+  4004eb:	c5 fd 28 45 d0       	vmovapd -0x30(%rbp),%ymm0
+  4004f0:	0f 31                	rdtsc  
+  4004f2:	89 d1                	mov    %edx,%ecx
+  4004f4:	89 c6                	mov    %eax,%esi
+  4004f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4004fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400500:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400505:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40050a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40050f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400514:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400519:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40051e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400523:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400528:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40052d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400532:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400537:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40053c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400541:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400546:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40054b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400550:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400555:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40055a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40055f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400564:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400569:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40056e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400573:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400578:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40057d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400582:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400587:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40058c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400591:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400596:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40059b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4005ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400604:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400609:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40060e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400613:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400618:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40061d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400622:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400627:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40062c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400631:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400636:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40063b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400640:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400645:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40064a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40064f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400654:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400659:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40065e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400663:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400668:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40066d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400672:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400677:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40067c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400681:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400686:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40068b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400690:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400695:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40069a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40069f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4006fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400703:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400708:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40070d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400712:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400717:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40071c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400721:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400726:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40072b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400730:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400735:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40073a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40073f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400744:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400749:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40074e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400753:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400758:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40075d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400762:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400767:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40076c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400771:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400776:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40077b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400780:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400785:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40078a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40078f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400794:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400799:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40079e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4007fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400802:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400807:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40080c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400811:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400816:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40081b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400820:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400825:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40082a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40082f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400834:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400839:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40083e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400843:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400848:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40084d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400852:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400857:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40085c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400861:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400866:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40086b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400870:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400875:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40087a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40087f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400884:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400889:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40088e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400893:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400898:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40089d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4008fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400901:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400906:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40090b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400910:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400915:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40091a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40091f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400924:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400929:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40092e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400933:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400938:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40093d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400942:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400947:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40094c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400951:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400956:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40095b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400960:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400965:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40096a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40096f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400974:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400979:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40097e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400983:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400988:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40098d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400992:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400997:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40099c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4009fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a00:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a05:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a0a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a0f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a14:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a19:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a1e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a23:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a28:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a2d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a32:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a37:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a3c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a41:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a46:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a4b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a50:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a55:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a5a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a5f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a64:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a69:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a6e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a73:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a78:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a7d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a82:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a87:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a8c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a91:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a96:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400a9b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aa0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aa5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aaa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aaf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ab4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ab9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400abe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ac3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ac8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400acd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ad2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ad7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400adc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ae1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ae6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aeb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400af0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400af5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400afa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400aff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b04:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b09:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b0e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b13:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b18:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b1d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b22:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b27:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b2c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b31:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b36:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b3b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b40:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b45:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b4a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b4f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b54:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b59:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b5e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b63:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b68:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b6d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b72:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b77:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b7c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b81:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b86:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b8b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b90:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b95:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b9a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400b9f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ba4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ba9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bb3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bb8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bbd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bc2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bc7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bcc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bd1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bd6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bdb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400be0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400be5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bf4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bf9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400bfe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c03:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c08:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c0d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c12:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c17:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c1c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c21:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c26:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c2b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c30:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c35:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c3a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c3f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c44:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c49:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c4e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c53:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c58:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c5d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c62:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c67:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c6c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c71:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c76:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c7b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c80:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c85:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c8a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c8f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c94:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c99:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400c9e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ca3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ca8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cb2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cb7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cbc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cc1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cc6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ccb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cd0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cd5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cda:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cdf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ce4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ce9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cf3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cf8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400cfd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d02:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d07:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d0c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d11:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d16:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d1b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d20:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d25:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d2a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d2f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d34:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d39:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d3e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d43:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d48:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d4d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d52:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d57:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d5c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d61:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d66:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d6b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d70:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d75:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d7a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d7f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d84:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d89:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d8e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d93:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d98:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400d9d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400da2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400da7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400db1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400db6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dbb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dc0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dc5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dcf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dd4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dd9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dde:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400de3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400de8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ded:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400df2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400df7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400dfc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e01:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e06:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e0b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e10:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e15:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e1a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e1f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e24:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e29:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e2e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e33:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e38:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e3d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e42:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e47:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e4c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e51:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e56:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e5b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e60:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e65:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e6a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e6f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e74:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e79:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e7e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e83:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e88:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e8d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e92:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e97:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400e9c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ea1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ea6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400eab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400eb0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400eb5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400eba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ebf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ec4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ec9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ece:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ed3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ed8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400edd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ee2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ee7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400eec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ef1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ef6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400efb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f00:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f05:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f0a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f0f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f14:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f19:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f1e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f23:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f28:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f2d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f32:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f37:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f3c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f41:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f46:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f4b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f50:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f55:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f5a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f5f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f64:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f69:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f6e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f73:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f78:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f7d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f82:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f87:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f8c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f91:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f96:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400f9b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fa0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fa5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400faa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400faf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fb4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fb9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fbe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fc3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fc8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fcd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fd2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fd7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fdc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fe1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fe6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400feb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ff0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ff5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400ffa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  400fff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401004:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401009:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40100e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401013:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401018:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40101d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401022:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401027:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40102c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401031:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401036:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40103b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401040:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401045:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40104a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40104f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401054:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401059:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40105e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401063:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401068:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40106d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401072:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401077:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40107c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401081:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401086:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40108b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401090:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401095:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40109a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40109f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4010fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401103:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401108:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40110d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401112:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401117:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40111c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401121:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401126:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40112b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401130:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401135:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40113a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40113f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401144:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401149:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40114e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401153:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401158:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40115d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401162:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401167:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40116c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401171:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401176:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40117b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401180:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401185:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40118a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40118f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401194:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401199:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40119e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4011fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401202:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401207:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40120c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401211:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401216:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40121b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401220:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401225:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40122a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40122f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401234:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401239:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40123e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401243:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401248:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40124d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401252:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401257:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40125c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401261:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401266:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40126b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401270:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401275:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40127a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40127f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401284:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401289:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40128e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401293:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401298:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40129d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4012fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401301:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401306:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40130b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401310:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401315:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40131a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40131f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401324:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401329:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40132e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401333:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401338:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40133d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401342:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401347:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40134c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401351:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401356:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40135b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401360:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401365:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40136a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40136f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401374:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401379:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40137e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401383:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401388:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40138d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401392:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401397:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40139c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4013fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401400:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401405:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40140a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40140f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401414:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401419:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40141e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401423:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401428:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40142d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401432:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401437:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40143c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401441:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401446:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40144b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401450:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401455:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40145a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40145f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401464:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401469:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40146e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401473:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401478:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40147d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401482:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401487:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40148c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401491:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401496:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40149b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4014ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401504:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401509:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40150e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401513:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401518:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40151d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401522:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401527:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40152c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401531:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401536:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40153b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401540:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401545:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40154a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40154f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401554:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401559:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40155e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401563:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401568:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40156d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401572:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401577:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40157c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401581:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401586:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40158b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401590:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401595:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40159a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40159f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4015fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401603:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401608:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40160d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401612:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401617:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40161c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401621:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401626:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40162b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401630:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401635:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40163a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40163f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401644:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401649:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40164e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401653:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401658:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40165d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401662:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401667:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40166c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401671:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401676:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40167b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401680:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401685:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40168a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40168f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401694:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401699:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40169e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4016fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401702:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401707:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40170c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401711:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401716:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40171b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401720:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401725:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40172a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40172f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401734:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401739:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40173e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401743:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401748:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40174d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401752:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401757:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40175c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401761:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401766:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40176b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401770:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401775:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40177a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40177f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401784:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401789:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40178e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401793:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401798:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40179d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4017fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401801:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401806:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40180b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401810:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401815:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40181a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40181f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401824:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401829:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40182e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401833:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401838:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40183d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401842:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401847:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40184c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401851:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401856:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40185b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401860:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401865:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40186a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40186f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401874:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401879:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40187e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401883:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401888:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40188d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401892:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401897:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40189c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4018fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401900:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401905:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40190a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40190f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401914:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401919:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40191e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401923:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401928:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40192d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401932:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401937:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40193c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401941:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401946:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40194b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401950:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401955:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40195a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40195f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401964:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401969:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40196e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401973:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401978:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40197d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401982:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401987:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40198c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401991:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401996:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40199b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4019ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a04:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a09:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a0e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a13:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a18:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a1d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a22:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a27:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a2c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a31:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a36:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a3b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a40:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a45:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a4a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a4f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a54:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a59:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a5e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a63:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a68:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a6d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a72:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a77:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a7c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a81:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a86:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a8b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a90:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a95:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a9a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401a9f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401aa4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401aa9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401aae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ab3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ab8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401abd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ac2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ac7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401acc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ad1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ad6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401adb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ae0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ae5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401aea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401aef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401af4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401af9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401afe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b03:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b08:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b0d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b12:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b17:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b1c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b21:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b26:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b2b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b30:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b35:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b3a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b3f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b44:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b49:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b4e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b53:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b58:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b5d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b62:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b67:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b6c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b71:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b76:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b7b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b80:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b85:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b8a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b8f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b94:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b99:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401b9e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ba3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ba8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bb2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bb7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bbc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bc1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bc6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bcb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bd0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bd5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bda:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bdf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401be4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401be9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bf3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bf8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401bfd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c02:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c07:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c0c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c11:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c16:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c1b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c20:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c25:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c2a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c2f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c34:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c39:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c3e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c43:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c48:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c4d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c52:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c57:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c5c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c61:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c66:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c6b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c70:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c75:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c7a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c7f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c84:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c89:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c8e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c93:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c98:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401c9d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ca2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ca7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cb1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cb6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cbb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cc0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cc5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ccf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cd4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cd9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cde:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ce3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ce8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ced:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cf2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cf7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401cfc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d01:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d06:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d0b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d10:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d15:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d1a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d1f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d24:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d29:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d2e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d33:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d38:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d3d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d42:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d47:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d4c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d51:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d56:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d5b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d60:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d65:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d6a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d6f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d74:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d79:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d7e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d83:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d88:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d8d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d92:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d97:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401d9c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401da1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401da6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401db0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401db5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dbf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dc4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dc9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dd3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dd8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ddd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401de2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401de7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401df1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401df6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401dfb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e00:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e05:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e0a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e0f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e14:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e19:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e1e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e23:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e28:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e2d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e32:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e37:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e3c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e41:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e46:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e4b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e50:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e55:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e5a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e5f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e64:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e69:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e6e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e73:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e78:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e7d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e82:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e87:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e8c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e91:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e96:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401e9b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ea0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ea5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eaa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eaf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eb4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eb9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ebe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ec3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ec8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ecd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ed2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ed7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401edc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ee1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ee6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eeb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ef0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ef5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401efa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401eff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f04:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f09:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f0e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f13:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f18:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f1d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f22:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f27:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f2c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f31:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f36:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f3b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f40:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f45:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f4a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f4f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f54:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f59:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f5e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f63:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f68:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f6d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f72:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f77:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f7c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f81:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f86:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f8b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f90:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f95:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f9a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401f9f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fa4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fa9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fb3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fb8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fbd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fc2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fc7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fcc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fd1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fd6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fdb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fe0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fe5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401fef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ff4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ff9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  401ffe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402003:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402008:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40200d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402012:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402017:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40201c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402021:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402026:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40202b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402030:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402035:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40203a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40203f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402044:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402049:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40204e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402053:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402058:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40205d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402062:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402067:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40206c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402071:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402076:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40207b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402080:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402085:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40208a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40208f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402094:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402099:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40209e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4020fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402102:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402107:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40210c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402111:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402116:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40211b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402120:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402125:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40212a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40212f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402134:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402139:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40213e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402143:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402148:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40214d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402152:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402157:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40215c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402161:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402166:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40216b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402170:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402175:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40217a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40217f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402184:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402189:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40218e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402193:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402198:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40219d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4021fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402201:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402206:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40220b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402210:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402215:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40221a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40221f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402224:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402229:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40222e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402233:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402238:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40223d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402242:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402247:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40224c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402251:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402256:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40225b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402260:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402265:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40226a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40226f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402274:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402279:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40227e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402283:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402288:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40228d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402292:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402297:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40229c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4022fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402300:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402305:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40230a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40230f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402314:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402319:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40231e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402323:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402328:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40232d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402332:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402337:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40233c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402341:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402346:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40234b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402350:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402355:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40235a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40235f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402364:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402369:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40236e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402373:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402378:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40237d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402382:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402387:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40238c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402391:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402396:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40239b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4023ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402404:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402409:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40240e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402413:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402418:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40241d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402422:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402427:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40242c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402431:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402436:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40243b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402440:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402445:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40244a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40244f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402454:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402459:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40245e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402463:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402468:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40246d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402472:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402477:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40247c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402481:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402486:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40248b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402490:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402495:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40249a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40249f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4024fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402503:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402508:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40250d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402512:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402517:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40251c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402521:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402526:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40252b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402530:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402535:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40253a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40253f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402544:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402549:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40254e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402553:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402558:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40255d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402562:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402567:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40256c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402571:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402576:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40257b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402580:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402585:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40258a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40258f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402594:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402599:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40259e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4025fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402602:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402607:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40260c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402611:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402616:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40261b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402620:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402625:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40262a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40262f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402634:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402639:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40263e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402643:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402648:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40264d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402652:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402657:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40265c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402661:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402666:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40266b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402670:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402675:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40267a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40267f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402684:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402689:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40268e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402693:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402698:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40269d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4026fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402701:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402706:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40270b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402710:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402715:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40271a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40271f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402724:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402729:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40272e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402733:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402738:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40273d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402742:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402747:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40274c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402751:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402756:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40275b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402760:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402765:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40276a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40276f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402774:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402779:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40277e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402783:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402788:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40278d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402792:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402797:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40279c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4027fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402800:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402805:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40280a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40280f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402814:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402819:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40281e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402823:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402828:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40282d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402832:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402837:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40283c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402841:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402846:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40284b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402850:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402855:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40285a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40285f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402864:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402869:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40286e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402873:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402878:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40287d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402882:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402887:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40288c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402891:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402896:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40289b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4028ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402904:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402909:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40290e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402913:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402918:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40291d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402922:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402927:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40292c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402931:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402936:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40293b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402940:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402945:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40294a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40294f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402954:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402959:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40295e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402963:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402968:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40296d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402972:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402977:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40297c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402981:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402986:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40298b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402990:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402995:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40299a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40299f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4029fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a03:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a08:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a0d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a12:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a17:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a1c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a21:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a26:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a2b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a30:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a35:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a3a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a3f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a44:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a49:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a4e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a53:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a58:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a5d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a62:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a67:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a6c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a71:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a76:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a7b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a80:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a85:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a8a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a8f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a94:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a99:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402a9e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402aa3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402aa8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402aad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ab2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ab7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402abc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ac1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ac6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402acb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ad0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ad5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ada:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402adf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ae4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ae9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402aee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402af3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402af8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402afd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b02:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b07:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b0c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b11:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b16:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b1b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b20:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b25:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b2a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b2f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b34:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b39:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b3e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b43:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b48:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b4d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b52:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b57:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b5c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b61:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b66:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b6b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b70:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b75:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b7a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b7f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b84:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b89:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b8e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b93:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b98:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402b9d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ba2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ba7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bb1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bb6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bbb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bc0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bc5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bcf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bd4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bd9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bde:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402be3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402be8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bf2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bf7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402bfc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c01:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c06:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c0b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c10:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c15:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c1a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c1f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c24:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c29:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c2e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c33:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c38:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c3d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c42:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c47:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c4c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c51:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c56:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c5b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c60:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c65:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c6a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c6f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c74:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c79:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c7e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c83:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c88:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c8d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c92:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c97:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402c9c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ca1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ca6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cb0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cb5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cbf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cc4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cc9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cd3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cd8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cdd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ce2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ce7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cf1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cf6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402cfb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d00:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d05:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d0a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d0f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d14:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d19:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d1e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d23:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d28:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d2d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d32:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d37:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d3c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d41:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d46:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d4b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d50:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d55:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d5a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d5f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d64:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d69:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d6e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d73:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d78:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d7d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d82:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d87:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d8c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d91:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d96:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402d9b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402da0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402da5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402daa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402daf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402db4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402db9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dbe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dc3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dc8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dcd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dd2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dd7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ddc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402de1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402de6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402deb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402df0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402df5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dfa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402dff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e04:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e09:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e0e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e13:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e18:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e1d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e22:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e27:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e2c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e31:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e36:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e3b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e40:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e45:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e4a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e4f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e54:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e59:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e5e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e63:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e68:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e6d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e72:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e77:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e7c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e81:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e86:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e8b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e90:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e95:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e9a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402e9f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ea4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ea9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402eae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402eb3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402eb8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ebd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ec2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ec7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ecc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ed1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ed6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402edb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ee0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ee5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402eea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402eef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ef4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ef9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402efe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f03:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f08:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f0d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f12:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f17:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f1c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f21:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f26:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f2b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f30:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f35:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f3a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f3f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f44:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f49:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f4e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f53:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f58:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f5d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f62:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f67:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f6c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f71:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f76:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f7b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f80:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f85:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f8a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f8f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f94:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f99:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402f9e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fa3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fa8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fb2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fb7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fbc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fc1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fc6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fcb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fd0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fd5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fda:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fdf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fe4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fe9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402fee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ff3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ff8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  402ffd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403002:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403007:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40300c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403011:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403016:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40301b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403020:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403025:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40302a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40302f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403034:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403039:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40303e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403043:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403048:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40304d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403052:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403057:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40305c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403061:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403066:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40306b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403070:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403075:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40307a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40307f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403084:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403089:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40308e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403093:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403098:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40309d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4030fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403101:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403106:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40310b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403110:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403115:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40311a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40311f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403124:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403129:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40312e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403133:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403138:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40313d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403142:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403147:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40314c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403151:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403156:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40315b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403160:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403165:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40316a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40316f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403174:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403179:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40317e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403183:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403188:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40318d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403192:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403197:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40319c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4031fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403200:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403205:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40320a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40320f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403214:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403219:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40321e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403223:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403228:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40322d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403232:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403237:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40323c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403241:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403246:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40324b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403250:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403255:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40325a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40325f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403264:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403269:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40326e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403273:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403278:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40327d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403282:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403287:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40328c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403291:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403296:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40329b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4032ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403304:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403309:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40330e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403313:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403318:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40331d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403322:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403327:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40332c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403331:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403336:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40333b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403340:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403345:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40334a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40334f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403354:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403359:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40335e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403363:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403368:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40336d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403372:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403377:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40337c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403381:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403386:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40338b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403390:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403395:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40339a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40339f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4033fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403403:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403408:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40340d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403412:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403417:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40341c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403421:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403426:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40342b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403430:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403435:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40343a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40343f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403444:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403449:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40344e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403453:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403458:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40345d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403462:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403467:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40346c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403471:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403476:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40347b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403480:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403485:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40348a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40348f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403494:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403499:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40349e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4034fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403502:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403507:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40350c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403511:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403516:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40351b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403520:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403525:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40352a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40352f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403534:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403539:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40353e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403543:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403548:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40354d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403552:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403557:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40355c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403561:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403566:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40356b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403570:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403575:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40357a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40357f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403584:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403589:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40358e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403593:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403598:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40359d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035a2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035a7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035ac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035b1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035b6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035bb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035c0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035c5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035ca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035cf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035d4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035d9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035de:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035e3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035e8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035ed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035f2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035f7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4035fc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403601:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403606:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40360b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403610:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403615:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40361a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40361f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403624:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403629:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40362e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403633:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403638:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40363d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403642:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403647:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40364c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403651:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403656:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40365b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403660:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403665:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40366a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40366f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403674:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403679:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40367e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403683:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403688:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40368d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403692:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403697:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40369c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036a1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036a6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036ab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036b0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036b5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036ba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036bf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036c4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036c9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036ce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036d3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036d8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036dd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036e2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036e7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036ec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036f1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036f6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4036fb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403700:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403705:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40370a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40370f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403714:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403719:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40371e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403723:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403728:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40372d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403732:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403737:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40373c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403741:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403746:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40374b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403750:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403755:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40375a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40375f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403764:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403769:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40376e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403773:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403778:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40377d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403782:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403787:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40378c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403791:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403796:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40379b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037a0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037a5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037aa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037af:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037b4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037b9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037be:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037c3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037c8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037cd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037d2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037d7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037dc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037e1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037e6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037eb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037f0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037f5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037fa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4037ff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403804:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403809:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40380e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403813:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403818:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40381d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403822:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403827:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40382c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403831:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403836:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40383b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403840:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403845:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40384a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40384f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403854:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403859:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40385e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403863:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403868:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40386d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403872:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403877:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40387c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403881:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403886:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40388b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403890:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403895:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40389a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40389f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038a4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038a9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038ae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038b3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038b8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038bd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038c2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038c7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038cc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038d1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038d6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038db:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038e0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038e5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038ea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038ef:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038f4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038f9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4038fe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403903:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403908:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40390d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403912:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403917:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40391c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403921:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403926:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40392b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403930:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403935:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40393a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40393f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403944:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403949:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40394e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403953:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403958:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40395d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403962:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403967:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40396c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403971:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403976:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40397b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403980:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403985:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40398a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40398f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403994:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403999:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  40399e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039a3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039a8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039ad:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039b2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039b7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039bc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039c1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039c6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039cb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039d0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039d5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039da:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039df:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039e4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039e9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039ee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039f3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039f8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  4039fd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a02:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a07:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a0c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a11:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a16:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a1b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a20:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a25:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a2a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a2f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a34:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a39:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a3e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a43:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a48:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a4d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a52:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a57:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a5c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a61:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a66:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a6b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a70:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a75:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a7a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a7f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a84:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a89:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a8e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a93:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a98:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403a9d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403aa2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403aa7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403aac:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ab1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ab6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403abb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ac0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ac5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403aca:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403acf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ad4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ad9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ade:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ae3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ae8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403aed:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403af2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403af7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403afc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b01:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b06:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b0b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b10:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b15:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b1a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b1f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b24:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b29:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b2e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b33:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b38:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b3d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b42:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b47:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b4c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b51:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b56:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b5b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b60:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b65:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b6a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b6f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b74:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b79:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b7e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b83:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b88:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b8d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b92:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b97:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403b9c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ba1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ba6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bab:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bb0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bb5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bba:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bbf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bc4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bc9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bce:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bd3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bd8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bdd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403be2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403be7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bec:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bf1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bf6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403bfb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c00:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c05:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c0a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c0f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c14:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c19:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c1e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c23:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c28:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c2d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c32:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c37:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c3c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c41:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c46:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c4b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c50:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c55:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c5a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c5f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c64:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c69:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c6e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c73:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c78:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c7d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c82:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c87:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c8c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c91:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c96:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403c9b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ca0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ca5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403caa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403caf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cb4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cb9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cbe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cc3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cc8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ccd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cd2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cd7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cdc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ce1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ce6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ceb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cf0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cf5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cfa:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403cff:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d04:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d09:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d0e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d13:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d18:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d1d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d22:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d27:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d2c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d31:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d36:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d3b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d40:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d45:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d4a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d4f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d54:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d59:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d5e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d63:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d68:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d6d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d72:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d77:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d7c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d81:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d86:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d8b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d90:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d95:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d9a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403d9f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403da4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403da9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dae:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403db3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403db8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dbd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dc2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dc7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dcc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dd1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dd6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ddb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403de0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403de5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dea:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403def:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403df4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403df9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403dfe:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e03:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e08:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e0d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e12:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e17:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e1c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e21:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e26:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e2b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e30:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e35:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e3a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e3f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e44:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e49:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e4e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e53:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e58:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e5d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e62:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e67:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e6c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e71:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e76:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e7b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e80:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e85:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e8a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e8f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e94:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e99:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403e9e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ea3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ea8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ead:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403eb2:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403eb7:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ebc:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ec1:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ec6:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ecb:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ed0:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ed5:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403eda:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403edf:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ee4:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ee9:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403eee:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ef3:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403ef8:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403efd:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f02:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f07:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f0c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f11:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f16:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f1b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f20:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f25:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f2a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f2f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f34:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f39:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f3e:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f43:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f48:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f4d:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f52:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f57:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f5c:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f61:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f66:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f6b:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f70:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f75:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f7a:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f7f:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f84:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f89:	c4 e2 fd b8 c0       	vfmadd231pd %ymm0,%ymm0,%ymm0
+  403f8e:	0f 31                	rdtsc  
+  403f90:	48 c1 e2 20          	shl    $0x20,%rdx
+  403f94:	89 c0                	mov    %eax,%eax
+  403f96:	48 c1 e1 20          	shl    $0x20,%rcx
+  403f9a:	48 09 c2             	or     %rax,%rdx
+  403f9d:	48 09 f1             	or     %rsi,%rcx
+  403fa0:	48 29 ca             	sub    %rcx,%rdx
+  403fa3:	48 01 d3             	add    %rdx,%rbx
+  403fa6:	83 ef 01             	sub    $0x1,%edi
+  403fa9:	0f 85 41 c5 ff ff    	jne    4004f0 <main+0x40>
+  403faf:	48 89 de             	mov    %rbx,%rsi
+  403fb2:	bf d8 41 40 00       	mov    $0x4041d8,%edi
+  403fb7:	31 c0                	xor    %eax,%eax
+  403fb9:	c5 f8 77             	vzeroupper 
+  403fbc:	e8 df c4 ff ff       	callq  4004a0 <printf@plt>
+  403fc1:	48 85 db             	test   %rbx,%rbx
+  403fc4:	78 60                	js     404026 <main+0x3b76>
+  403fc6:	c5 f1 57 c9          	vxorpd %xmm1,%xmm1,%xmm1
+  403fca:	c4 e1 f3 2a cb       	vcvtsi2sd %rbx,%xmm1,%xmm1
+  403fcf:	c5 f3 59 0d 79 02 00 	vmulsd 0x279(%rip),%xmm1,%xmm1        # 404250 <__dso_handle+0x80>
+  403fd6:	00 
+  403fd7:	bf 08 42 40 00       	mov    $0x404208,%edi
+  403fdc:	b8 01 00 00 00       	mov    $0x1,%eax
+  403fe1:	c5 f3 5e 0d 6f 02 00 	vdivsd 0x26f(%rip),%xmm1,%xmm1        # 404258 <__dso_handle+0x88>
+  403fe8:	00 
+  403fe9:	c5 f9 28 c1          	vmovapd %xmm1,%xmm0
+  403fed:	c5 fb 11 4d c8       	vmovsd %xmm1,-0x38(%rbp)
+  403ff2:	e8 a9 c4 ff ff       	callq  4004a0 <printf@plt>
+  403ff7:	c5 fb 10 4d c8       	vmovsd -0x38(%rbp),%xmm1
+  403ffc:	bf 30 42 40 00       	mov    $0x404230,%edi
+  404001:	c5 fb 10 05 57 02 00 	vmovsd 0x257(%rip),%xmm0        # 404260 <__dso_handle+0x90>
+  404008:	00 
+  404009:	b8 01 00 00 00       	mov    $0x1,%eax
+  40400e:	c5 fb 5e c1          	vdivsd %xmm1,%xmm0,%xmm0
+  404012:	e8 89 c4 ff ff       	callq  4004a0 <printf@plt>
+  404017:	48 83 c4 40          	add    $0x40,%rsp
+  40401b:	31 c0                	xor    %eax,%eax
+  40401d:	5b                   	pop    %rbx
+  40401e:	41 5a                	pop    %r10
+  404020:	5d                   	pop    %rbp
+  404021:	49 8d 62 f8          	lea    -0x8(%r10),%rsp
+  404025:	c3                   	retq   
+  404026:	48 89 d8             	mov    %rbx,%rax
+  404029:	83 e3 01             	and    $0x1,%ebx
+  40402c:	c5 f1 57 c9          	vxorpd %xmm1,%xmm1,%xmm1
+  404030:	48 d1 e8             	shr    %rax
+  404033:	48 09 d8             	or     %rbx,%rax
+  404036:	c4 e1 f3 2a c8       	vcvtsi2sd %rax,%xmm1,%xmm1
+  40403b:	c5 f3 58 c9          	vaddsd %xmm1,%xmm1,%xmm1
+  40403f:	eb 8e                	jmp    403fcf <main+0x3b1f>
 
-000000000040056d <.annobin_elf_init.c.hot>:
-  40056d:	0f 1f 00             	nopl   (%rax)
+0000000000404041 <.annobin_elf_init.c.hot>:
+  404041:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  404048:	00 00 00 
+  40404b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
 
-0000000000400570 <_start>:
-  400570:	f3 0f 1e fa          	endbr64 
-  400574:	31 ed                	xor    %ebp,%ebp
-  400576:	49 89 d1             	mov    %rdx,%r9
-  400579:	5e                   	pop    %rsi
-  40057a:	48 89 e2             	mov    %rsp,%rdx
-  40057d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
-  400581:	50                   	push   %rax
-  400582:	54                   	push   %rsp
-  400583:	49 c7 c0 d0 06 40 00 	mov    $0x4006d0,%r8
-  40058a:	48 c7 c1 60 06 40 00 	mov    $0x400660,%rcx
-  400591:	48 c7 c7 b0 04 40 00 	mov    $0x4004b0,%rdi
-  400598:	ff 15 4a 0a 20 00    	callq  *0x200a4a(%rip)        # 600fe8 <__libc_start_main@GLIBC_2.2.5>
-  40059e:	f4                   	hlt    
+0000000000404050 <_start>:
+  404050:	f3 0f 1e fa          	endbr64 
+  404054:	31 ed                	xor    %ebp,%ebp
+  404056:	49 89 d1             	mov    %rdx,%r9
+  404059:	5e                   	pop    %rsi
+  40405a:	48 89 e2             	mov    %rsp,%rdx
+  40405d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  404061:	50                   	push   %rax
+  404062:	54                   	push   %rsp
+  404063:	49 c7 c0 b0 41 40 00 	mov    $0x4041b0,%r8
+  40406a:	48 c7 c1 40 41 40 00 	mov    $0x404140,%rcx
+  404071:	48 c7 c7 b0 04 40 00 	mov    $0x4004b0,%rdi
+  404078:	ff 15 6a 0f 20 00    	callq  *0x200f6a(%rip)        # 604fe8 <__libc_start_main@GLIBC_2.2.5>
+  40407e:	f4                   	hlt    
 
-000000000040059f <.annobin_init.c>:
-  40059f:	90                   	nop
+000000000040407f <.annobin_init.c>:
+  40407f:	90                   	nop
 
-00000000004005a0 <_dl_relocate_static_pie>:
-  4005a0:	f3 0f 1e fa          	endbr64 
-  4005a4:	c3                   	retq   
+0000000000404080 <_dl_relocate_static_pie>:
+  404080:	f3 0f 1e fa          	endbr64 
+  404084:	c3                   	retq   
 
-00000000004005a5 <.annobin__dl_relocate_static_pie.end>:
-  4005a5:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  4005ac:	00 00 00 
-  4005af:	90                   	nop
+0000000000404085 <.annobin__dl_relocate_static_pie.end>:
+  404085:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  40408c:	00 00 00 
+  40408f:	90                   	nop
 
-00000000004005b0 <deregister_tm_clones>:
-  4005b0:	48 8d 3d 71 0a 20 00 	lea    0x200a71(%rip),%rdi        # 601028 <__TMC_END__>
-  4005b7:	48 8d 05 6a 0a 20 00 	lea    0x200a6a(%rip),%rax        # 601028 <__TMC_END__>
-  4005be:	48 39 f8             	cmp    %rdi,%rax
-  4005c1:	74 15                	je     4005d8 <deregister_tm_clones+0x28>
-  4005c3:	48 8b 05 16 0a 20 00 	mov    0x200a16(%rip),%rax        # 600fe0 <_ITM_deregisterTMCloneTable@Base>
-  4005ca:	48 85 c0             	test   %rax,%rax
-  4005cd:	74 09                	je     4005d8 <deregister_tm_clones+0x28>
-  4005cf:	ff e0                	jmpq   *%rax
-  4005d1:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
-  4005d8:	c3                   	retq   
-  4005d9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+0000000000404090 <deregister_tm_clones>:
+  404090:	48 8d 3d 91 0f 20 00 	lea    0x200f91(%rip),%rdi        # 605028 <__TMC_END__>
+  404097:	48 8d 05 8a 0f 20 00 	lea    0x200f8a(%rip),%rax        # 605028 <__TMC_END__>
+  40409e:	48 39 f8             	cmp    %rdi,%rax
+  4040a1:	74 15                	je     4040b8 <deregister_tm_clones+0x28>
+  4040a3:	48 8b 05 36 0f 20 00 	mov    0x200f36(%rip),%rax        # 604fe0 <_ITM_deregisterTMCloneTable@Base>
+  4040aa:	48 85 c0             	test   %rax,%rax
+  4040ad:	74 09                	je     4040b8 <deregister_tm_clones+0x28>
+  4040af:	ff e0                	jmpq   *%rax
+  4040b1:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  4040b8:	c3                   	retq   
+  4040b9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
 
-00000000004005e0 <register_tm_clones>:
-  4005e0:	48 8d 3d 41 0a 20 00 	lea    0x200a41(%rip),%rdi        # 601028 <__TMC_END__>
-  4005e7:	48 8d 35 3a 0a 20 00 	lea    0x200a3a(%rip),%rsi        # 601028 <__TMC_END__>
-  4005ee:	48 29 fe             	sub    %rdi,%rsi
-  4005f1:	48 c1 fe 03          	sar    $0x3,%rsi
-  4005f5:	48 89 f0             	mov    %rsi,%rax
-  4005f8:	48 c1 e8 3f          	shr    $0x3f,%rax
-  4005fc:	48 01 c6             	add    %rax,%rsi
-  4005ff:	48 d1 fe             	sar    %rsi
-  400602:	74 14                	je     400618 <register_tm_clones+0x38>
-  400604:	48 8b 05 ed 09 20 00 	mov    0x2009ed(%rip),%rax        # 600ff8 <_ITM_registerTMCloneTable@Base>
-  40060b:	48 85 c0             	test   %rax,%rax
-  40060e:	74 08                	je     400618 <register_tm_clones+0x38>
-  400610:	ff e0                	jmpq   *%rax
-  400612:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
-  400618:	c3                   	retq   
-  400619:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+00000000004040c0 <register_tm_clones>:
+  4040c0:	48 8d 3d 61 0f 20 00 	lea    0x200f61(%rip),%rdi        # 605028 <__TMC_END__>
+  4040c7:	48 8d 35 5a 0f 20 00 	lea    0x200f5a(%rip),%rsi        # 605028 <__TMC_END__>
+  4040ce:	48 29 fe             	sub    %rdi,%rsi
+  4040d1:	48 c1 fe 03          	sar    $0x3,%rsi
+  4040d5:	48 89 f0             	mov    %rsi,%rax
+  4040d8:	48 c1 e8 3f          	shr    $0x3f,%rax
+  4040dc:	48 01 c6             	add    %rax,%rsi
+  4040df:	48 d1 fe             	sar    %rsi
+  4040e2:	74 14                	je     4040f8 <register_tm_clones+0x38>
+  4040e4:	48 8b 05 0d 0f 20 00 	mov    0x200f0d(%rip),%rax        # 604ff8 <_ITM_registerTMCloneTable@Base>
+  4040eb:	48 85 c0             	test   %rax,%rax
+  4040ee:	74 08                	je     4040f8 <register_tm_clones+0x38>
+  4040f0:	ff e0                	jmpq   *%rax
+  4040f2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  4040f8:	c3                   	retq   
+  4040f9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
 
-0000000000400620 <__do_global_dtors_aux>:
-  400620:	f3 0f 1e fa          	endbr64 
-  400624:	80 3d f9 09 20 00 00 	cmpb   $0x0,0x2009f9(%rip)        # 601024 <_edata>
-  40062b:	75 13                	jne    400640 <__do_global_dtors_aux+0x20>
-  40062d:	55                   	push   %rbp
-  40062e:	48 89 e5             	mov    %rsp,%rbp
-  400631:	e8 7a ff ff ff       	callq  4005b0 <deregister_tm_clones>
-  400636:	c6 05 e7 09 20 00 01 	movb   $0x1,0x2009e7(%rip)        # 601024 <_edata>
-  40063d:	5d                   	pop    %rbp
-  40063e:	c3                   	retq   
-  40063f:	90                   	nop
-  400640:	c3                   	retq   
-  400641:	66 66 2e 0f 1f 84 00 	data16 nopw %cs:0x0(%rax,%rax,1)
-  400648:	00 00 00 00 
-  40064c:	0f 1f 40 00          	nopl   0x0(%rax)
+0000000000404100 <__do_global_dtors_aux>:
+  404100:	f3 0f 1e fa          	endbr64 
+  404104:	80 3d 19 0f 20 00 00 	cmpb   $0x0,0x200f19(%rip)        # 605024 <_edata>
+  40410b:	75 13                	jne    404120 <__do_global_dtors_aux+0x20>
+  40410d:	55                   	push   %rbp
+  40410e:	48 89 e5             	mov    %rsp,%rbp
+  404111:	e8 7a ff ff ff       	callq  404090 <deregister_tm_clones>
+  404116:	c6 05 07 0f 20 00 01 	movb   $0x1,0x200f07(%rip)        # 605024 <_edata>
+  40411d:	5d                   	pop    %rbp
+  40411e:	c3                   	retq   
+  40411f:	90                   	nop
+  404120:	c3                   	retq   
+  404121:	66 66 2e 0f 1f 84 00 	data16 nopw %cs:0x0(%rax,%rax,1)
+  404128:	00 00 00 00 
+  40412c:	0f 1f 40 00          	nopl   0x0(%rax)
 
-0000000000400650 <frame_dummy>:
-  400650:	f3 0f 1e fa          	endbr64 
-  400654:	eb 8a                	jmp    4005e0 <register_tm_clones>
-  400656:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  40065d:	00 00 00 
+0000000000404130 <frame_dummy>:
+  404130:	f3 0f 1e fa          	endbr64 
+  404134:	eb 8a                	jmp    4040c0 <register_tm_clones>
+  404136:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  40413d:	00 00 00 
 
-0000000000400660 <__libc_csu_init>:
-  400660:	f3 0f 1e fa          	endbr64 
-  400664:	41 57                	push   %r15
-  400666:	49 89 d7             	mov    %rdx,%r15
-  400669:	41 56                	push   %r14
-  40066b:	49 89 f6             	mov    %rsi,%r14
-  40066e:	41 55                	push   %r13
-  400670:	41 89 fd             	mov    %edi,%r13d
-  400673:	41 54                	push   %r12
-  400675:	4c 8d 25 84 07 20 00 	lea    0x200784(%rip),%r12        # 600e00 <__frame_dummy_init_array_entry>
-  40067c:	55                   	push   %rbp
-  40067d:	48 8d 2d 84 07 20 00 	lea    0x200784(%rip),%rbp        # 600e08 <__init_array_end>
-  400684:	53                   	push   %rbx
-  400685:	4c 29 e5             	sub    %r12,%rbp
-  400688:	48 83 ec 08          	sub    $0x8,%rsp
-  40068c:	e8 d7 fd ff ff       	callq  400468 <_init>
-  400691:	48 c1 fd 03          	sar    $0x3,%rbp
-  400695:	74 1f                	je     4006b6 <__libc_csu_init+0x56>
-  400697:	31 db                	xor    %ebx,%ebx
-  400699:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
-  4006a0:	4c 89 fa             	mov    %r15,%rdx
-  4006a3:	4c 89 f6             	mov    %r14,%rsi
-  4006a6:	44 89 ef             	mov    %r13d,%edi
-  4006a9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
-  4006ad:	48 83 c3 01          	add    $0x1,%rbx
-  4006b1:	48 39 dd             	cmp    %rbx,%rbp
-  4006b4:	75 ea                	jne    4006a0 <__libc_csu_init+0x40>
-  4006b6:	48 83 c4 08          	add    $0x8,%rsp
-  4006ba:	5b                   	pop    %rbx
-  4006bb:	5d                   	pop    %rbp
-  4006bc:	41 5c                	pop    %r12
-  4006be:	41 5d                	pop    %r13
-  4006c0:	41 5e                	pop    %r14
-  4006c2:	41 5f                	pop    %r15
-  4006c4:	c3                   	retq   
+0000000000404140 <__libc_csu_init>:
+  404140:	f3 0f 1e fa          	endbr64 
+  404144:	41 57                	push   %r15
+  404146:	49 89 d7             	mov    %rdx,%r15
+  404149:	41 56                	push   %r14
+  40414b:	49 89 f6             	mov    %rsi,%r14
+  40414e:	41 55                	push   %r13
+  404150:	41 89 fd             	mov    %edi,%r13d
+  404153:	41 54                	push   %r12
+  404155:	4c 8d 25 a4 0c 20 00 	lea    0x200ca4(%rip),%r12        # 604e00 <__frame_dummy_init_array_entry>
+  40415c:	55                   	push   %rbp
+  40415d:	48 8d 2d a4 0c 20 00 	lea    0x200ca4(%rip),%rbp        # 604e08 <__init_array_end>
+  404164:	53                   	push   %rbx
+  404165:	4c 29 e5             	sub    %r12,%rbp
+  404168:	48 83 ec 08          	sub    $0x8,%rsp
+  40416c:	e8 f7 c2 ff ff       	callq  400468 <_init>
+  404171:	48 c1 fd 03          	sar    $0x3,%rbp
+  404175:	74 1f                	je     404196 <__libc_csu_init+0x56>
+  404177:	31 db                	xor    %ebx,%ebx
+  404179:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  404180:	4c 89 fa             	mov    %r15,%rdx
+  404183:	4c 89 f6             	mov    %r14,%rsi
+  404186:	44 89 ef             	mov    %r13d,%edi
+  404189:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  40418d:	48 83 c3 01          	add    $0x1,%rbx
+  404191:	48 39 dd             	cmp    %rbx,%rbp
+  404194:	75 ea                	jne    404180 <__libc_csu_init+0x40>
+  404196:	48 83 c4 08          	add    $0x8,%rsp
+  40419a:	5b                   	pop    %rbx
+  40419b:	5d                   	pop    %rbp
+  40419c:	41 5c                	pop    %r12
+  40419e:	41 5d                	pop    %r13
+  4041a0:	41 5e                	pop    %r14
+  4041a2:	41 5f                	pop    %r15
+  4041a4:	c3                   	retq   
 
-00000000004006c5 <.annobin___libc_csu_fini.start>:
-  4006c5:	66 66 2e 0f 1f 84 00 	data16 nopw %cs:0x0(%rax,%rax,1)
-  4006cc:	00 00 00 00 
+00000000004041a5 <.annobin___libc_csu_fini.start>:
+  4041a5:	66 66 2e 0f 1f 84 00 	data16 nopw %cs:0x0(%rax,%rax,1)
+  4041ac:	00 00 00 00 
 
-00000000004006d0 <__libc_csu_fini>:
-  4006d0:	f3 0f 1e fa          	endbr64 
-  4006d4:	c3                   	retq   
+00000000004041b0 <__libc_csu_fini>:
+  4041b0:	f3 0f 1e fa          	endbr64 
+  4041b4:	c3                   	retq   
 
 Disassembly of section .fini:
 
-00000000004006d8 <_fini>:
-  4006d8:	f3 0f 1e fa          	endbr64 
-  4006dc:	48 83 ec 08          	sub    $0x8,%rsp
-  4006e0:	48 83 c4 08          	add    $0x8,%rsp
-  4006e4:	c3                   	retq   
+00000000004041b8 <_fini>:
+  4041b8:	f3 0f 1e fa          	endbr64 
+  4041bc:	48 83 ec 08          	sub    $0x8,%rsp
+  4041c0:	48 83 c4 08          	add    $0x8,%rsp
+  4041c4:	c3                   	retq   

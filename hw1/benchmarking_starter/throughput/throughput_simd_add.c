@@ -10,9 +10,9 @@
 //TODO: Change number of instructions to reflect your chains
 #define NUM_INST 3000.0
 //TODO: Change to reflect number of independent chains
-#define NUM_CHAINS 10
+#define NUM_CHAINS 8
 
-#define ADD(src1, src2, src3, src4, src5, src6, src7, src8, src9, src10) \
+#define ADD(src1, src2, src3, src4, src5, src6, src7, src8) \
   __asm__ __volatile__( \
     "vaddpd %[xsrc1], %[xsrc1], %[xsrc1]\n" \
     "vaddpd %[xsrc2], %[xsrc2], %[xsrc2]\n" \
@@ -22,8 +22,6 @@
     "vaddpd %[xsrc6], %[xsrc6], %[xsrc6]\n" \
     "vaddpd %[xsrc7], %[xsrc7], %[xsrc7]\n" \
     "vaddpd %[xsrc8], %[xsrc8], %[xsrc8]\n" \
-    "vaddpd %[xsrc9], %[xsrc9], %[xsrc9]\n" \
-    "vaddpd %[xsrc10], %[xsrc10], %[xsrc10]\n" \
     : [xsrc1] "+x" (src1), \
       [xsrc2] "+x" (src2), \
       [xsrc3] "+x" (src3), \
@@ -31,46 +29,44 @@
       [xsrc5] "+x" (src5), \
       [xsrc6] "+x" (src6), \
       [xsrc7] "+x" (src7), \
-      [xsrc8] "+x" (src8), \
-      [xsrc9] "+x" (src9),  \
-      [xsrc10] "+x" (src10)  \
+      [xsrc8] "+x" (src8) \
   );
 
-#define ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx)
+#define ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD(ax, bx, cx, dx, ex, fx, gx, hx)
 
-#define ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD10(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx)
+#define ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD10(ax, bx, cx, dx, ex, fx, gx, hx)
 
-#define ADD1000(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx) \
-  ADD100(ax, bx, cd, dx, ex, fx, gx, hx, ix, jx)
+#define ADD1000(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx) \
+  ADD100(ax, bx, cx, dx, ex, fx, gx, hx)
 
 static __inline__ unsigned long long rdtsc(void) {
   unsigned hi, lo;
@@ -124,9 +120,9 @@ int main(int argc, char **argv) {
 
     // Time the add
     st = rdtsc();
-    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx);
-    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx);
-    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx, ix, jx);
+    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
+    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
+    ADD1000(ax, bx, cx, dx, ex, fx, gx, hx);
 
     et = rdtsc();
 
